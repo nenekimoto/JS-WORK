@@ -12,12 +12,12 @@
 <body>
 <h1 class="u-mbm is-big">JS1</h1>
 <div class="wrapper">
-  <div class="u-mbm btn">Q1</div>
-  <div class="u-mbm btn">Q2</div>
-  <div class="u-mbm btn">Q3</div>
-  <div class="u-mbm btn">Q4</div>
-  <div class="u-mbm btn is-big">Q5</div>
-  <div class="u-mbm btn">Q6</div>
+  <div id="Q1" class="u-mbm btn">Q1</div>
+  <div id="Q2" class="u-mbm btn">Q2</div>
+  <div id="Q3" class="u-mbm btn">Q3</div>
+  <div id="Q4" class="u-mbm btn">Q4</div>
+  <div id="Q5" class="u-mbm btn is-big">Q5</div>
+  <div id="Q6" class="u-mbm btn">Q6</div>
   <div>
     <dl class="u-mbm lists">
       <dt>Q7_dt_1</dt>
@@ -40,20 +40,20 @@
       <dd>Q7_dd_5</dd>
     </dl>
   </div>
-  <div class="u-mbm btn">Q8</div>
-  <div class="u-mbm btn">Q9</div>
-  <ul class="u-mbm lists">
+  <div id=Q8 class="u-mbm btn">Q8</div>
+  <div id="Q9" class="u-mbm btn">Q9</div>
+  <ul id="Q10" class="u-mbm lists">
     <li>Q10_1</li>
     <li>Q10_2</li>
     <li>Q10_3</li>
   </ul>
-  <ul class="u-mbm lists">
+  <ul  id="Q11" class="u-mbm lists">
     <li>Q11_1</li>
     <li>Q11_2</li>
     <li>Q11_3</li>
   </ul>
-  <div class="u-mbm btn">Q12</div>
-  <ul class="u-mbm lists">
+  <div id="Q12" class="u-mbm btn">Q12</div>
+  <ul id="Q13" class="u-mbm lists">
     <li>Q13_1</li>
     <li>Q13_2</li>
     <li>Q13_3</li>
@@ -64,26 +64,117 @@
   // js課題① 下記問題のJSを実装して下さい
 
   // 第1問 ロードから5秒後にQ1の要素の文字サイズを30pxにせよ。
+  window.onload = function() {
+    setTimeout(function() {
+      document.getElementById("Q1").style.fontSize = "30px";
+    }, 5000); }
 
   // 第2問 Q2の要素をクリックしたら背景色を赤、文字色を黒にせよ。
 
-  // 第3問 Q3の要素をクリックしたら文字色を赤にし、その状態でもう一度クリックすると元に戻るようにせよ。
+    //要素の取得 → クリックされたとき
+  let Q2=document.getElementById("Q2");
+    Q2.addEventListener('click',function(){
+      //要素の取得 → 背景色を変える
+      Q2.style.background='red';
+      Q2.style.color='black';
+    });
 
-  // 第4問 Q4の要素をクリックしたらこの要素の前後とこの要素内の前後に<p>テキスト</p>を挿入せよ。
+  // 第3問 Q3の要素をクリックしたら文字色を赤にし、その状態でもう一度クリックすると元に戻るようにせよ。
+  let Q3=document.getElementById("Q3");
+    Q3.addEventListener('click',function(){
+      Q3.classList.toggle('red');
+    },false);
+
+  // 第4問 Q4の要素をクリックしたらこの要素の前後とこの要素内の前後に<p>テキスト</p>を挿入せよ
+  let Q4 = document.getElementById("Q4");
+    Q4.addEventListener('click', function() {
+      let newText = document.createElement('p');
+      newText.textContent = 'テキスト';
+      //　要素の外側の上に表示
+       Q4.parentNode.insertBefore(newText, Q4);
+      // 要素の外側の下に表示
+      Q4.parentNode.insertBefore(document.createElement('p'), Q4.nextSibling).textContent = 'テキスト';
+      // 要素の中の下に表示
+      Q4.appendChild(document.createElement('p'), Q4.firstChild).textContent = 'テキスト';
+      // 要素の中の上に表示
+      Q4.insertBefore(document.createElement('p'), Q4.firstChild).textContent = 'テキスト';
+    });
 
   // 第5問 Q5の要素をクリックしたらこの要素からis-bigというクラスを削除せよ。
+  const element = document.getElementById("Q5");
+    element.addEventListener('click', function() {
+      element.classList.remove("is-big");
+    });
 
   // 第6問 Q6の要素をクリックしたらこの要素を0.5秒かけてmargin-rightとmargin-bottomを150pxの位置に移動させよ。
+    document.getElementById('Q6').addEventListener('click', function() {
+      this.classList.add('Q6move');
+    });
 
   // 第7問 Q7の要素をクリックしたら、その要素が「何番目のdlの子要素」かをconsole.log()とalert()を用いて表示させよ。（最初の要素は0ではなく1と表示されること）Hint：closest()メソッドを使う
+  var dlElements = document.querySelectorAll('.u-mbm.lists');
+    dlElements.forEach(function(dlElement, index) {
+      dlElement.addEventListener('click', function() {
+        // クリックされた要素が何番目のdl要素の子要素かを取得
+        var childIndex = Array.from(dlElement.parentElement.children).indexOf(dlElement) + 1;
+      
+        // 結果をconsole.log()で表示
+        console.log('クリックされた要素は、' + childIndex + '番目のdl要素の子要素です。');
+      
+        // 結果をalert()で表示
+        alert('クリックされた要素は、' + childIndex + '番目のdl要素の子要素です。');
+      });
+    });
 
   // 第8問 Q8の要素をhoverしたらis-bigというクラスを付与し、hoverが外れたら、クラスを削除せよ。
+  const Q8 = document.getElementById("Q8");
+    // マウスを置いたとき
+    Q8.addEventListener('mouseover', function() {
+      // 'is-big' クラスを追加
+      this.classList.add('is-big');
+    });
+      // マウスを離したとき
+      Q8.addEventListener('mouseout', function() {
+        // 'is-big' クラスを削除
+        this.classList.remove('is-big');
+      });
 
   // 第9問 Q9の要素をクリックしたらこの要素にdata属性を設定し、その内容をconsoleに表示せよ。
+  const Q9 = document.getElementById("Q9");
+    // クリック時のイベントリスナーを追加
+    Q9.addEventListener('click', function() {
+      // data属性を設定
+      this.setAttribute('data-example', 'exampleValue');
+      // data属性の内容を取得してコンソールに表示
+      const dataValue = this.getAttribute('data-example');
+      console.log(dataValue);
+    });
 
   // 第10問 Q10の子要素をクリックしたら、その要素のインデックスと等しいid="q11"の子要素にis-bigというクラスを追加し、それ以外のクラスからは削除せよ。（インデックスの一致する要素だけにis-bigがついている状態）
+  document.addEventListener('DOMContentLoaded', function() {
+      const Q10 = document.getElementById("Q10");
+      const Q11 = document.getElementById("Q11").children;
+
+    Q10.addEventListener('click', function(event) {
+      const clickedIndex = Array.from(this.children).indexOf(event.target);
+        Array.from(Q11).forEach((child, index) => {
+            if (index === clickedIndex) {
+                  child.classList.add('is-big');
+                  } else {
+                  child.classList.remove('is-big');
+            }
+        });
+    });
+  });
 
   // 第11問 Q12をクリックしたら、Q13リストのli要素の順番と中身のテキストをconsoleに表示させよ。
+  const Q12 = document.getElementById("Q12");
+    Q12.addEventListener('click', function() {
+        const Q13Items = document.querySelectorAll('#Q13 li');
+        Q13Items.forEach(function(item, index) {
+            console.log("Index: " + index + ", Text: " + item.textContent);
+        });
+    });
 </script>
 </body>
 </html>

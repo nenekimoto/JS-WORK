@@ -5,14 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <title>04 | 1-jQuery</title>
-  <link rel="stylesheet" href="../../00-tools/css/reset.css">
-  <link rel="stylesheet" href="../../00-tools/css/base.css">
+  <link rel="stylesheet" href="../00-tools/css/reset.css">
+  <link rel="stylesheet" href="../00-tools/css/base.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="wrapper">
 </div>
 <script defer>
+  document.addEventListener('DOMContentLoaded', function() {
+    var wrapper = document.querySelector('.wrapper');
+  
+    // 1から100までループします
+    for (var i = 1; i <= 100; i++) {
+      var output = '';
+    
+      // 3の倍数かつ5の倍数の場合
+      if (i % 3 === 0 && i % 5 === 0) {
+        output = 'FizzBuzz';
+      } 
+      // 3の倍数の場合
+      else if (i % 3 === 0) {
+       output = 'Fizz';
+      } 
+      // 5の倍数の場合
+      else if (i % 5 === 0) {
+        output = 'Buzz';
+      } 
+      // 上記の条件に当てはまらない場合は数字を表示
+      else {
+       output = i.toString(); // 数字を文字列に変換して格納
+      }
+    
+      var div = document.createElement('div');
+      div.textContent = output;
+      wrapper.appendChild(div);
+    }
+  });
   /*
    * 今回やるのはFizzBuzzです。
    *

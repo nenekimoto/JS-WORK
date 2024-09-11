@@ -26,6 +26,19 @@
    *
    * 
    */
+  document.addEventListener('DOMContentLoaded', function() {
+    const modalShowButton = document.querySelector('.modal-show');
+    const modalCloseButton = document.querySelector('.modal-close');
+    const modal = document.querySelector('.modal');
+
+    modalShowButton.addEventListener('click', function() {
+      modal.style.display = 'block';
+    });
+
+    modalCloseButton.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+  });
 </script>
 </body>
 </html>

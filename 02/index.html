@@ -12,13 +12,13 @@
 <body>
 <h1 class="u-mbm is-big">JS2</h1>
 <div class="wrapper">
-  <div class="u-mbm btn">Q1</div>
-  <div class="u-mbm btn">Q2</div>
-  <div class="u-mbm btn">Q3</div>
-  <div class="u-mbm btn">Q4</div>
-  <div class="u-mbm btn">Q5</div>
-  <div class="u-mbm btn">Q6</div>
-  <div class="u-mbm btn">Q7</div>
+  <div id="Q1" class="u-mbm btn">Q1</div>
+  <div id="Q2" class="u-mbm btn">Q2</div>
+  <div id="Q3" class="u-mbm btn">Q3</div>
+  <div id="Q4" class="u-mbm btn">Q4</div>
+  <div id="Q5" class="u-mbm btn">Q5</div>
+  <div id="Q6" class="u-mbm btn" data-color="red">Q6</div>
+  <div id="Q7" class="u-mbm btn" data-color="blue">Q7</div>
 </div>
 
 <script defer>
@@ -43,12 +43,81 @@
    * 何もしない
    */
 
+    document.getElementById("Q1").addEventListener('click', function() {
+　　//confilmはダイアログボックス表示
+        if (confirm('年代を確認しますか？')) {
+
+            //promptはユーザーが入力するまでダイアログボックス表示
+            var age = prompt('年齢を入力してください', '');
+            
+            // 変数ageが数値であるかどうかをチェックするための条件式
+            if (!isNaN(age)) {
+                //文字列として入力された値を整数に変換する
+                age = parseInt(age);
+                if (age >= 0 && age <= 1) {
+                    alert(age + '歳のあなたは乳児でちゅ。');
+                //else ifは条件分岐　elseはそれ以外
+                } else if (age >= 2 && age <= 6) {
+                    alert(age + '歳のあなたは幼児でしゅ。');
+                } else if (age >= 7 && age <= 12) {
+                    alert(age + '歳のあなたは小学生だよ。');
+                } else if (age >= 13 && age <= 15) {
+                    alert(age + '歳のあなたは中学生だぜ。');
+                } else if (age >= 16 && age <= 18) {
+                    alert(age + '歳のあなたは高校生っす。');
+                } else if (age >= 19 && age <= 22) {
+                    alert(age + '歳のあなたは大学生です。');
+                } else if (age >= 23 && age <= 59) {
+                    alert(age + '歳のあなたは社会人でございます。');
+                } else if (age >= 60 && age <= 99) {
+                    alert(age + '歳のあなたは高齢者じゃ。');
+                } else if (age >= 100) {
+                    alert('すごい。');
+                }
+            } else {
+                alert('ちゃんと入れてください。');
+            }
+        } else {
+            // ユーザーがキャンセルを選択した場合の処理
+            // 何もしない
+        }
+    });
+
   // 第2問 id="q2"の要素をクリックしたらfor文を用いて、12345678910という文字列を作り、#q2の後にその文字列を挿入せよ。
+    document.getElementById('Q2').addEventListener('click', function() {
+        var parentElement = this;
+        //０から１までの数字をループ処理
+        for (var i = 0; i <= 10; i++) {
+            var newElement = document.createElement('div');
+            newElement.textContent = i;
+            //新しい要素を親要素の子要素として追加
+            parentElement.appendChild(newElement);
+        }
+    });
 
   // 第3問 id="q3"の要素をクリックしたらfor文、if文を用いて、1~100の数字で3と7を約数に持つ（3と7で割れる）整数で文字列を作り、#q3の後にその文字列を挿入せよ。
+    document.getElementById("Q3").addEventListener("click", function() {
+        for (let i = 1; i <= 100; i++) { // 1から100までの数値をループ
+            if (i % 3 == 0 && i % 7 == 0) { // 3と7の両方で割り切れるかのチェック
+                const lineBreak = document.createElement("p"); // 改行要素の作成
+                lineBreak.textContent = i; // 文字列を新しい要素に設定
+                document.getElementById("Q3").appendChild(lineBreak); // 改行要素をQ3の要素内に追加
+            }
+        }
+    });
 
   // 第4問 id="q4"の要素をクリックしたらfor文を用いて、[2,4,6,8,10,12,14,16,18,20]という配列をconsoleに出力せよ。
-
+    document.getElementById("Q4").addEventListener("click", function() {
+        //array 配列の基本型
+        const array = [];
+            //1 から 10 までの数値を順に処理する for ループを開始 //i はループカウンタ
+            for (let i = 1; i <= 10; i++) {
+                //各ループのたびに、i の値を2倍にした結果を array 配列に追加
+                array.push(i * 2);
+            }
+            //配列 array の内容をコンソールに出力
+            console.log(array);
+    });
   /**
    * 第5問 id="q5"の要素をクリックし、以下の情報をそれぞれ表示せよ。
    *
@@ -59,6 +128,22 @@
    *
    */
 
+    document.getElementById("Q5").addEventListener("click", function() {
+        //windouwブラウザのウィンドウそのもの //location現在のページのURLに関する情報を持つ 
+        console.log(window.location.pathname);
+
+        //今日の日付を取得できるnew Dateを格納
+        const today = new Date();
+        // 年・月・日・曜日を取得
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const date = today.getDate();
+        const day = today.getDay();
+        console.log(year + "-" );
+        console.log(month + "-");
+        console.log(date + "-");
+    });
+
   /**
    * 第6問
    * id="q6"の要素をクリックすると要素の文字が赤くなり、
@@ -66,8 +151,22 @@
    *
    * 但し、コールバック関数は１つで実装すること。
    * 必要に応じて、要素に属性などは追加して良いものとします。
-   */
+   */ 
+   document.addEventListener('DOMContentLoaded', (event) => {
+        // コールバック関数 //ある関数を呼び出す時に、引数に指定する別の関数のこと
+        function changeColor(event) {
+             //  要素のdata-color属性の値を取得
+            const color = event.target.getAttribute('data-color');
+            //colorは変数、クリックされた要素のdata-color属性から取得した色の値が格納されている
+            //CSSにアクセス
+            document.getElementById('Q6').style.color = color;
+            document.getElementById('Q7').style.color = color;
+        }
 
+        // イベントリスナーを追加
+        document.getElementById('Q6').addEventListener('click', changeColor);
+        document.getElementById('Q7').addEventListener('click', changeColor);
+    });
 </script>
 </body>
 </html>

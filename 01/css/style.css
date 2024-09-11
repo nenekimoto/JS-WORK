@@ -2,6 +2,7 @@
   margin-bottom: 20px;
   text-align: center;
 }
+
 .btn {
   line-height: 40px;
   border-radius: 10px;
@@ -11,6 +12,7 @@
   color: #fff;
   cursor: pointer;
 }
+
 .lists > li {
   text-align: center;
   line-height: 30px;
@@ -45,4 +47,14 @@
 }
 .is-big {
   font-size: 25px;
+}
+
+.red{
+  color:red;
+}
+
+.Q6move{
+  transition: all 0.5s ease;
+  margin-top: 150px;
+  margin-left: 150px;
 }
